@@ -164,29 +164,29 @@ var BaseLogger = /** @class */ (function () {
     }
     BaseLogger.prototype.info = function (message) {
         if (this.level <= 1) {
-            this.log(message, this.level);
+            this.log(message);
         }
     };
     BaseLogger.prototype.warning = function (message) {
         if (this.level <= 2) {
-            this.log(message, this.level);
+            this.log(message);
         }
     };
     BaseLogger.prototype.critical = function (message) {
         if (this.level <= 3) {
-            this.log(message, this.level);
+            this.log(message);
         }
     };
     return BaseLogger;
 }());
 var ConsoleLogger2 = /** @class */ (function (_super) {
     __extends(ConsoleLogger2, _super);
-    function ConsoleLogger2(lv) {
+    function ConsoleLogger2(level) {
         var _this = _super.call(this) || this;
-        _this.level = lv;
+        _this.level = level;
         return _this;
     }
-    ConsoleLogger2.prototype.log = function (message, level) {
+    ConsoleLogger2.prototype.log = function (message) {
         console.log(message);
     };
     return ConsoleLogger2;
@@ -199,8 +199,8 @@ var DateConsoleLogger2 = /** @class */ (function (_super) {
     DateConsoleLogger2.prototype.getDateMessage = function (message) {
         return (new Date()).toLocaleString() + ': ' + message;
     };
-    DateConsoleLogger2.prototype.log = function (message, level) {
-        _super.prototype.log.call(this, this.getDateMessage(message), level);
+    DateConsoleLogger2.prototype.log = function (message) {
+        _super.prototype.log.call(this, this.getDateMessage(message));
     };
     return DateConsoleLogger2;
 }(ConsoleLogger2));
@@ -208,11 +208,11 @@ var Job = /** @class */ (function () {
     function Job(logger) {
         this.logger = logger;
     }
+    // constructor(private baseLogger:BaseLogger){}
     Job.prototype.run = function () {
         try {
             this.logger.info("i started work");
             this.logger.warning("i have warning");
-            //  throw new Error('runtime error');
             this.logger.critical('i have error');
             this.logger.info(this.logger.data.toString());
             this.logger.info('i finished work');
@@ -224,6 +224,7 @@ var Job = /** @class */ (function () {
     return Job;
 }());
 // const job = new Job(new ConsoleLogger())
-var job = new Job(new DateConsoleLogger());
+// const job = new Job(new DateConsoleLogger())
 // const job = new Job(new DateConsoleLogger2(1))
+var job = new Job(new ConsoleLogger2(2));
 job.run();

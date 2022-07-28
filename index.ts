@@ -205,34 +205,34 @@ data=5
     
     info(message: string): void {
         if (this.level <= 1) {
-            this.log(message,this.level);
+            this.log(message);
         }   
     }
 
     warning(message: string): void {
         if (this.level <= 2) {
-            this.log(message,this.level);
+            this.log(message);
         }  
     }
 
     critical(message: string): void {
         if (this.level <= 3) {
-            this.log(message,this.level);
+            this.log(message);
         }     
     }
 
-   protected abstract  log(message:string,level:number):void
+   protected abstract  log(message:string):void
 }
 
 
 class ConsoleLogger2 extends BaseLogger{
      
-    constructor(lv:number) {
+    constructor(level:number) {
         super();
-        this.level=lv
+        this.level=level
     }
 
-    protected log(message: string, level: number) {      
+   protected log(message: string) {      
                 console.log(message);
                  
 }
@@ -245,8 +245,8 @@ class DateConsoleLogger2 extends ConsoleLogger2 {
    return (new Date()).toLocaleString()+': '+message
 }
 
-    protected log(message: string, level: number): void{
-      super.log( this.getDateMessage(message), level);    
+     log(message: string): void{
+      super.log( this.getDateMessage(message));    
   }
 
 }
@@ -259,14 +259,14 @@ class DateConsoleLogger2 extends ConsoleLogger2 {
 class Job{
 
     constructor(private logger: Logger) { }
-    
+    // constructor(private baseLogger:BaseLogger){}
     
 
     run():void {
          try {
              this.logger.info("i started work");
              this.logger.warning ("i have warning");
-            //  throw new Error('runtime error');
+            
              this.logger.critical('i have error');
              this.logger.info(this.logger.data.toString());
 
@@ -283,8 +283,9 @@ class Job{
 
 
 // const job = new Job(new ConsoleLogger())
-const job = new Job(new DateConsoleLogger())
+// const job = new Job(new DateConsoleLogger())
 
 // const job = new Job(new DateConsoleLogger2(1))
+const job = new Job(new ConsoleLogger2(2))
 
 job.run()
