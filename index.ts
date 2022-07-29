@@ -286,6 +286,86 @@ class Job{
 // const job = new Job(new DateConsoleLogger())
 
 // const job = new Job(new DateConsoleLogger2(1))
-const job = new Job(new ConsoleLogger2(2))
+// const job = new Job(new ConsoleLogger2(2))
 
-job.run()
+// job.run()
+
+
+
+function getId<T,H>(id:T,addText:H):void {
+    // if (typeof (id) === 'number') {
+    //   return  id.toString()+addText
+    // } else if (typeof (id) === 'string') {
+    //     return id+addText
+    // }
+    // return 'her'
+
+    console.log(id,addText);
+}
+
+console.log(getId<string,string>('rtt','rty'));
+console.log(getId<number, number>(444, 456));
+
+
+class Customer<T, B>{
+    constructor(private id: T, private info: B) { }
+    
+    getId(): T{
+        return this.id
+    }
+    getInfo(): B{
+        return this.info
+    }
+
+}
+
+const customer = new Customer<number, string>(345, 'think:mouth')
+
+interface IModel{
+    id:number
+}
+
+class Collection<T extends IModel> {
+    constructor(private items: T[]) { }
+    
+    find(id: number): T | undefined{
+        const first = this.items.find((model) => model.id === id);
+        // return first?first:null
+        return first
+    }
+}
+
+const collection1 = new Collection<{test:string,id:number}>([
+    {
+        id: 34,
+        test: 'rty',
+        
+    },
+    {
+        id: 35,
+        test:'xnty'
+    },
+    {
+        id: 37, 
+        test:"world"
+    }
+])
+
+const collection = new Collection([
+    {
+        id: 34,
+        test: 'rty',
+        tttt:"dfdf"
+    },
+    {
+        id: 35,
+        test:'xnty'
+    },
+    {
+        id: 37, 
+        test:"world"
+    }
+])
+
+console.log(collection.find(35), "35");
+console.log(collection.find(88),"88");

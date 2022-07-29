@@ -1,39 +1,20 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var root = document.getElementById('root');
-var Cat = /** @class */ (function () {
-    function Cat(name) {
+const root = document.getElementById('root');
+class Cat {
+    constructor(name) {
         this.name = name;
     }
-    return Cat;
-}());
-var kitty = new Cat('Svifsick');
+}
+const kitty = new Cat('Svifsick');
 if (root) {
     root.innerHTML = 'Lora\'s kat name is ' + kitty.name;
 }
-var array = [111, 222, 333];
-var _loop_1 = function (index) {
-    setTimeout(function () { return console.log(array[index]); }, 500);
-};
-for (var index = 0; index < array.length; index++) {
-    _loop_1(index);
+let array = [111, 222, 333];
+for (let index = 0; index < array.length; index++) {
+    setTimeout(() => console.log(array[index]), 500);
 }
-var numbers = [25, 69, 87, 45];
-var res = numbers.filter(function (val) { val == 69; });
+let numbers = [25, 69, 87, 45];
+let res = numbers.filter((val) => { val == 69; });
 var LifeParts;
 (function (LifeParts) {
     LifeParts[LifeParts["slipping"] = 0] = "slipping";
@@ -41,10 +22,10 @@ var LifeParts;
     LifeParts["codding"] = "Codding";
     LifeParts[LifeParts["doNothing"] = 4] = "doNothing";
 })(LifeParts || (LifeParts = {}));
-var stage = {
+const stage = {
     type: LifeParts.codding
 };
-var product = {
+let product = {
     // id: 'string',
     id: 5,
     sku: 'add string',
@@ -52,11 +33,11 @@ var product = {
     price: 4,
     description: 444
 };
-var typedProduct = product;
-var typedProduct2 = product;
-var prodDescription = product.description;
-var prodDescription2 = product.description;
-var newProduct = {
+const typedProduct = product;
+const typedProduct2 = product;
+let prodDescription = product.description;
+let prodDescription2 = product.description;
+const newProduct = {
     id: 'string',
     sku: 'string',
     name: 'string',
@@ -65,52 +46,40 @@ var newProduct = {
     color: 'string',
     weight: 898
 };
-var partData = {
+const partData = {
     name: 'string',
     price: 25,
 };
-var textField = document.getElementById('text-field');
-var textField2 = document.getElementById('text-field2');
-var textField3 = document.getElementById('text-field2');
-var User = /** @class */ (function () {
-    function User(name, surname, _isAdmin) {
-        if (_isAdmin === void 0) { _isAdmin = false; }
+const textField = document.getElementById('text-field');
+const textField2 = document.getElementById('text-field2');
+const textField3 = document.getElementById('text-field2');
+class User {
+    constructor(name, surname, _isAdmin = false) {
         this.name = name;
         this.surname = surname;
         this._isAdmin = _isAdmin;
     }
-    Object.defineProperty(User.prototype, "fullName", {
-        get: function () { return this.name + ' ' + this.surname; },
-        set: function (fullName) {
-            var _a;
-            _a = fullName.split(' '), this.name = _a[0], this.surname = _a[1];
-        },
-        enumerable: false,
-        configurable: true
-    });
+    get fullName() { return this.name + ' ' + this.surname; }
     ;
+    set fullName(fullName) { [this.name, this.surname] = fullName.split(' '); }
     ;
-    User.prototype.isUserAdmin = function (isAdmin) {
+    isUserAdmin(isAdmin) {
         this._isAdmin = isAdmin;
         if (this._isAdmin) {
             return 'Hi admin ' + this.name + ' ' + this.surname + User.addName;
         }
         return 'Hi user ' + this.name + ' ' + this.surname;
-    };
-    User.addName = 'Her';
-    return User;
-}());
-var Admin = /** @class */ (function (_super) {
-    __extends(Admin, _super);
-    function Admin() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this._isAdmin = true;
-        return _this;
     }
-    return Admin;
-}(User));
-var max = new User('Vasya', 'Pupkin');
-var admin = new Admin('Vasya', 'Pupkin');
+}
+User.addName = 'Her';
+class Admin extends User {
+    constructor() {
+        super(...arguments);
+        this._isAdmin = true;
+    }
+}
+const max = new User('Vasya', 'Pupkin');
+const admin = new Admin('Vasya', 'Pupkin');
 console.log(admin);
 // console.log(max.name + ' ' + max.surname);
 if (textField) {
@@ -123,93 +92,78 @@ if (textField2) {
 if (textField3) {
     textField3.innerText = max.isUserAdmin(true);
 }
-var ConsoleLogger = /** @class */ (function () {
-    function ConsoleLogger() {
+class ConsoleLogger {
+    constructor() {
         this.data = 3;
     }
-    ConsoleLogger.prototype.info = function (message) {
+    info(message) {
         console.log(message);
-    };
-    ConsoleLogger.prototype.warning = function (message) {
-        console.log(message);
-    };
-    ConsoleLogger.prototype.critical = function (message) {
-        console.log(message);
-    };
-    return ConsoleLogger;
-}());
-var DateConsoleLogger = /** @class */ (function (_super) {
-    __extends(DateConsoleLogger, _super);
-    function DateConsoleLogger() {
-        return _super !== null && _super.apply(this, arguments) || this;
     }
-    DateConsoleLogger.prototype.getDateMessage = function (message) {
+    warning(message) {
+        console.log(message);
+    }
+    critical(message) {
+        console.log(message);
+    }
+}
+class DateConsoleLogger extends ConsoleLogger {
+    getDateMessage(message) {
         return (new Date()).toLocaleString() + ': ' + message;
-    };
-    DateConsoleLogger.prototype.info = function (message) {
-        _super.prototype.info.call(this, this.getDateMessage(message));
-    };
-    DateConsoleLogger.prototype.warning = function (message) {
-        _super.prototype.warning.call(this, this.getDateMessage(message));
-    };
-    DateConsoleLogger.prototype.critical = function (message) {
-        _super.prototype.critical.call(this, this.getDateMessage(message));
-    };
-    return DateConsoleLogger;
-}(ConsoleLogger));
-var BaseLogger = /** @class */ (function () {
-    function BaseLogger() {
+    }
+    info(message) {
+        super.info(this.getDateMessage(message));
+    }
+    warning(message) {
+        super.warning(this.getDateMessage(message));
+    }
+    critical(message) {
+        super.critical(this.getDateMessage(message));
+    }
+}
+class BaseLogger {
+    constructor() {
         this.level = 1;
         this.data = 5;
     }
-    BaseLogger.prototype.info = function (message) {
+    info(message) {
         if (this.level <= 1) {
             this.log(message);
         }
-    };
-    BaseLogger.prototype.warning = function (message) {
+    }
+    warning(message) {
         if (this.level <= 2) {
             this.log(message);
         }
-    };
-    BaseLogger.prototype.critical = function (message) {
+    }
+    critical(message) {
         if (this.level <= 3) {
             this.log(message);
         }
-    };
-    return BaseLogger;
-}());
-var ConsoleLogger2 = /** @class */ (function (_super) {
-    __extends(ConsoleLogger2, _super);
-    function ConsoleLogger2(level) {
-        var _this = _super.call(this) || this;
-        _this.level = level;
-        return _this;
     }
-    ConsoleLogger2.prototype.log = function (message) {
+}
+class ConsoleLogger2 extends BaseLogger {
+    constructor(level) {
+        super();
+        this.level = level;
+    }
+    log(message) {
         console.log(message);
-    };
-    return ConsoleLogger2;
-}(BaseLogger));
-var DateConsoleLogger2 = /** @class */ (function (_super) {
-    __extends(DateConsoleLogger2, _super);
-    function DateConsoleLogger2() {
-        return _super !== null && _super.apply(this, arguments) || this;
     }
-    DateConsoleLogger2.prototype.getDateMessage = function (message) {
+}
+class DateConsoleLogger2 extends ConsoleLogger2 {
+    getDateMessage(message) {
         return (new Date()).toLocaleString() + ': ' + message;
-    };
-    DateConsoleLogger2.prototype.log = function (message) {
-        _super.prototype.log.call(this, this.getDateMessage(message));
-    };
-    return DateConsoleLogger2;
-}(ConsoleLogger2));
-var Job = /** @class */ (function () {
-    function Job(logger) {
+    }
+    log(message) {
+        super.log(this.getDateMessage(message));
+    }
+}
+class Job {
+    constructor(logger) {
         this.logger = logger;
     }
     // constructor(private baseLogger:BaseLogger){}
-    Job.prototype.run = function () {
+    run() {
         try {
             this.logger.info("i started work");
             this.logger.warning("i have warning");
@@ -220,11 +174,75 @@ var Job = /** @class */ (function () {
         catch (error) {
             this.logger.critical('i have error' + error);
         }
-    };
-    return Job;
-}());
+    }
+}
 // const job = new Job(new ConsoleLogger())
 // const job = new Job(new DateConsoleLogger())
 // const job = new Job(new DateConsoleLogger2(1))
-var job = new Job(new ConsoleLogger2(2));
-job.run();
+// const job = new Job(new ConsoleLogger2(2))
+// job.run()
+function getId(id, addText) {
+    // if (typeof (id) === 'number') {
+    //   return  id.toString()+addText
+    // } else if (typeof (id) === 'string') {
+    //     return id+addText
+    // }
+    // return 'her'
+    console.log(id, addText);
+}
+console.log(getId('rtt', 'rty'));
+console.log(getId(444, 456));
+class Customer {
+    constructor(id, info) {
+        this.id = id;
+        this.info = info;
+    }
+    getId() {
+        return this.id;
+    }
+    getInfo() {
+        return this.info;
+    }
+}
+const customer = new Customer(345, 'think:mouth');
+class Collection {
+    constructor(items) {
+        this.items = items;
+    }
+    find(id) {
+        const first = this.items.find((model) => model.id === id);
+        // return first?first:null
+        return first;
+    }
+}
+const collection1 = new Collection([
+    {
+        id: 34,
+        test: 'rty',
+    },
+    {
+        id: 35,
+        test: 'xnty'
+    },
+    {
+        id: 37,
+        test: "world"
+    }
+]);
+const collection = new Collection([
+    {
+        id: 34,
+        test: 'rty',
+        tttt: "dfdf"
+    },
+    {
+        id: 35,
+        test: 'xnty'
+    },
+    {
+        id: 37,
+        test: "world"
+    }
+]);
+console.log(collection.find(35), "35");
+console.log(collection.find(88), "88");
